@@ -1,0 +1,55 @@
+---
+title: "Social Anxiety Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("knitr")
+library("plotly")
+source("Summary.R")
+source("aggregate_table.R")
+source("bar_chart_gender_dif_Q5.R")
+source("scatterplot_time_on_social_media.R")
+source("pie_chart_age_demographic.R")
+```
+
+## Introduction
+
+Student Social Anxiety Survey: The data came from Carlson Hoo, a graduate student at The National University of Malaysia. The data was collected by surveying college students and asking them questions relating to situations that may trigger anxiousness. There are 12 columns and 67 rows. The main question being asked is how much of an impact does social media have on student’s anxiety, which then provides an understanding of what types of situations lead to a rise in anxiety levels. It is based on one of Hoo's previous studies, where he wanted to find out if social media develops anxiety or helps people with anxiety. This data helps answer our first question of looking for relationships between social media and mental health. In this case, the focus is on anxiety disorders.
+
+## Aggregate Table
+
+```{r table, echo = FALSE}
+kable(aggregate_table)
+```
+
+Our table reflects how age groups respond to certain questions from the questionnaire. The numbers represent the average response from a 1-5 scale of 'comfortable' at 1, and 'discomfort' at a 5. The observation made shows that on average, across all age gruops, there was an overall discomfort in the social activities listed in the questions. The average answer was no lower than a 3 out of 5 for all questions, which helps us infer that there is a pattern of social anxiety within all age groups.
+
+
+```{r social media scatterplot, echo = FALSE}
+plot(students_on_social_media_plot)
+```
+
+This scatterplot shows the amount of students in the `social_anxiety` data set,
+and expresses how many hours they spend on social media per day. By looking at the scatterplot,
+we were able to determine that the **majority** of students spend 4 hours and above of their day on social media. This data will help us determine if the time spent on social media affects anxiety levels.
+
+
+
+```{r gender dif chart, echo = FALSE}
+plot(gender_dif_chart)
+```
+
+This bar chart was created by calculating the mean comfortability of talking face-to-face with someone you are unfamiliar with and comparing the responses based on gender. We determined that females had an average of 4, which meant that their discomfort was pretty high, compared to males who were one number lower at 3. Based on this specific chart, we can tell that females have a greater level of discomfort. 
+
+
+```{r age demographic chart, echo = FALSE}
+title("Age demographic of social anxiety survey", pie(by_age$Freq, by_age$Var1))
+```
+
+This pie chart shows the age demographic of the people in the survey, including students and non-students. Most of the students were at an age range of 21-30. This adds up since the people surveyed were mostly college students. The lowest age group in the data set were those who were 20 or below. Since the survey was conducted in a college setting, it makes sense that only a few were 20 or below. This pie charts helps us get a sense what age group we are working with.  
+
+## Summary
+
+Our summary data includes summaries of the number of people who are using social media at the lowest number of hours (given in the questionnaire), which was `r summary_info$sum_lowest_hours_per_day_on_social_media` people. In contrast, the number of people using social media at the highest number of hours (4 hours or more) was at `r summary_info$sum_highest_hours_per_day_on_social_media`. We can observe that there are a much higher portion of people who are using social media for more than 4 hours a day compared to those using it for less than an hour per day. The data also reflects the number of people who were students, which was much higher than people who were not students. There were `r summary_info$num_observations` people in the data set, with `r summary_info$num_of_students` of them being students. The youngest people in the data set were `r summary_info$min_age` and the oldest were in the `r summary_info$max_age` range. 
