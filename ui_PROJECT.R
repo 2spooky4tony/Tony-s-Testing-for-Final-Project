@@ -33,7 +33,7 @@ shinyUI(
             sidebarPanel("Types of Information", x_input),
                  
                  
-                 mainPanel("test", bar_plot_by_tony )),
+                 mainPanel("Scale from 1-5 of comfort", bar_plot_by_tony )),
         
         tabPanel("pie chart", mainPanel(pie_chart_output))
         

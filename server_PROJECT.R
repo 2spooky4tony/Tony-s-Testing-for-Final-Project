@@ -11,9 +11,8 @@ library(plotly)
 
 server <- function(input, output) {
     output$barplot <- renderPlot({
-      plot <- ggplot(aggregate_table) +
-        geom_bar(ase_string(x="Age", y = input$x_input),
-                 ggplotly(plot))
+   ggplot(aggregate_table, aes_string(x="Age", y = input$x_input, fill= "Age")) +
+        geom_bar(stat='identity')
         
     })    
 
